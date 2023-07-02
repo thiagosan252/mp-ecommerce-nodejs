@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
 app.get('/success', function (req, res) {
     console.log('Success = Query', req.query)
     if (req.query)
-        res.json({ query: JSON.stringify(req.query) });
+        res.render('notificacao', req.query);
     else
         res.json({})
 });
@@ -40,7 +40,7 @@ app.get('/success', function (req, res) {
 app.get('/failure', function (req, res) {
     console.log('Failure = Query', req.query)
     if (req.query)
-        res.json({ query: JSON.stringify(req.query) });
+        res.render('notificacao', req.query);
     else
         res.json({})
 });
@@ -48,7 +48,7 @@ app.get('/failure', function (req, res) {
 app.get('/pending', function (req, res) {
     console.log('Pending = Query', req.query)
     if (req.query)
-        res.json({ query: JSON.stringify(req.query) });
+        res.render('notificacao', req.query);
     else
         res.json({})
 });
@@ -74,6 +74,7 @@ app.post("/create_preference", (req, res) => {
                 quantity: Number(req.query.quantity),
                 description: 'Dispositivo de loja de comércio eletrônico móvel',
                 currency_id: 'BRL',
+                category_id: "eletronico"
             }
         ],
         notification_url: `${process.env.FRONT_URL}/webhook`,
