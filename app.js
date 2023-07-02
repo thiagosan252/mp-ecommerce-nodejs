@@ -29,8 +29,12 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.post('/webhook', function (req, res) {
-    res.json({ "message": "success" });
+app.get('/webhook', function (req, res) {
+    console.log('Query', req.query)
+    if (req.query)
+        res.json({ query: JSON.stringify(req.query) });
+    else
+        res.json({})
 });
 
 app.post("/create_preference", (req, res) => {
