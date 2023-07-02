@@ -30,17 +30,17 @@ app.get('/', function (req, res) {
 });
 
 app.post('/webhook', function (req, res) {
-    res.json({
-        id: response.body.id
-    });
+    res.json({ "message": "success" });
 });
 
 app.post("/create_preference", (req, res) => {
 
-    let preference = {
+    mercadopago.preferences.create({
         items: [
             {
+                id: "1234",
                 title: req.query.title,
+                picture_url: "https://www.mercadopago.com/org-img/MP3/home/logomp3.gif",
                 unit_price: Number(req.query.price),
                 quantity: Number(req.query.quantity),
                 description: 'Dispositivo de loja de comércio eletrônico móvel',
@@ -55,12 +55,17 @@ app.post("/create_preference", (req, res) => {
                 }
             ],
             installments: 6
-        }
-    };
-
-    mercadopago.preferences.create({
-        ...preference,
+        },
         external_reference: process.env.EXTERNAL_REF ?? '',
+        payer: {
+            name: 'Lalo',
+            surname: 'Landa',
+            address: {
+                street_name: 'Rua Falsa 123',
+                street_number: 12,
+                zip_code: '86071650'
+            }
+        }
     })
         .then(function (response) {
             res.json({
