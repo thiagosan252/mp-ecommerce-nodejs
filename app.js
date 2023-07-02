@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/success', function (req, res) {
-    console.log('Query', req.query)
+    console.log('Success = Query', req.query)
     if (req.query)
         res.json({ query: JSON.stringify(req.query) });
     else
@@ -38,7 +38,7 @@ app.get('/success', function (req, res) {
 });
 
 app.get('/failure', function (req, res) {
-    console.log('Query', req.query)
+    console.log('Failure = Query', req.query)
     if (req.query)
         res.json({ query: JSON.stringify(req.query) });
     else
@@ -46,7 +46,7 @@ app.get('/failure', function (req, res) {
 });
 
 app.get('/pending', function (req, res) {
-    console.log('Query', req.query)
+    console.log('Pending = Query', req.query)
     if (req.query)
         res.json({ query: JSON.stringify(req.query) });
     else
@@ -54,7 +54,7 @@ app.get('/pending', function (req, res) {
 });
 
 app.post('/webhook', function (req, res) {
-    console.log('Query', req.query)
+    console.log('Webhook = Query', req.query)
     if (req.query)
         res.json({ query: JSON.stringify(req.query) });
     else
