@@ -29,28 +29,13 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.get('/success', function (req, res) {
+app.get('/feedback', function (req, res) {
     console.log('Success = Query', req.query)
-    if (req.query)
-        res.render('notificacao', req.query);
-    else
-        res.json({})
-});
-
-app.get('/failure', function (req, res) {
-    console.log('Failure = Query', req.query)
-    if (req.query)
-        res.render('notificacao', req.query);
-    else
-        res.json({})
-});
-
-app.get('/pending', function (req, res) {
-    console.log('Pending = Query', req.query)
-    if (req.query)
-        res.render('notificacao', req.query);
-    else
-        res.json({})
+    res.json({
+        Payment: req.query.payment_id,
+        Status: req.query.status,
+        MerchantOrder: req.query.merchant_order_id
+    });
 });
 
 app.post('/webhook', function (req, res) {
@@ -97,9 +82,9 @@ app.post("/create_preference", (req, res) => {
             }
         },
         back_urls: {
-            success: `${process.env.FRONT_URL}/success`,
-            failure: `${process.env.FRONT_URL}/failure`,
-            pending: `${process.env.FRONT_URL}/pending`
+            success: `${process.env.FRONT_URL}/feedback`,
+            failure: `${process.env.FRONT_URL}/feedback`,
+            pending: `${process.env.FRONT_URL}/feedback`
         },
         auto_return: "approved",
     })
