@@ -29,7 +29,31 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.get('/webhook', function (req, res) {
+app.get('/success', function (req, res) {
+    console.log('Query', req.query)
+    if (req.query)
+        res.json({ query: JSON.stringify(req.query) });
+    else
+        res.json({})
+});
+
+app.get('/failure', function (req, res) {
+    console.log('Query', req.query)
+    if (req.query)
+        res.json({ query: JSON.stringify(req.query) });
+    else
+        res.json({})
+});
+
+app.get('/pending', function (req, res) {
+    console.log('Query', req.query)
+    if (req.query)
+        res.json({ query: JSON.stringify(req.query) });
+    else
+        res.json({})
+});
+
+app.post('/webhook', function (req, res) {
     console.log('Query', req.query)
     if (req.query)
         res.json({ query: JSON.stringify(req.query) });
@@ -51,7 +75,7 @@ app.post("/create_preference", (req, res) => {
                 currency_id: 'BRL',
             }
         ],
-        notification_url: "https://thiagosan-mp-commerce-nodej-6ae8bfdbf611.herokuapp.com/webhook",
+        notification_url: `${process.env.FRONT_URL}/webhook`,
         payment_methods: {
             excluded_payment_methods: [
                 {
@@ -69,7 +93,13 @@ app.post("/create_preference", (req, res) => {
                 street_number: 12,
                 zip_code: '86071650'
             }
-        }
+        },
+        back_urls: {
+            success: `${process.env.FRONT_URL}/success`,
+            failure: `${process.env.FRONT_URL}/failure`,
+            pending: `${process.env.FRONT_URL}/pending`
+        },
+        auto_return: "approved",
     })
         .then(function (response) {
             res.json({
