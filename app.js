@@ -8,7 +8,8 @@ const port = process.env.PORT || 3000
 const mercadopago = require('mercadopago');
 // Adicione as credenciais
 mercadopago.configure({
-    access_token: process.env.ACCESS_TOKEN ?? ''
+    access_token: process.env.ACCESS_TOKEN ?? '',
+    integrator_id: process.env.INTEGRATOR_ID ?? ''
 });
 
 const app = express();
