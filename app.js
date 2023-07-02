@@ -55,8 +55,9 @@ app.get('/pending', function (req, res) {
 
 app.post('/webhook', function (req, res) {
     console.log('Webhook = Query', req.query)
-    if (req.query)
-        res.json({ query: JSON.stringify(req.query) });
+    console.log('Webhook = Body', req.body)
+    if (req.body)
+        res.json({ ...req.body });
     else
         res.json({})
 });
